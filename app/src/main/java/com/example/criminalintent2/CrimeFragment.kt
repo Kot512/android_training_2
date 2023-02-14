@@ -25,19 +25,19 @@ class CrimeFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         crime = Crime()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+    override fun onCreateView(     // в этой функции выбирается layout и заполняется (здесь
+        inflater: LayoutInflater,  // переменным, обозначенным ранее, присваиваются виджеты из
+        container: ViewGroup?,     // этого layout)
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_crime, container, false)
 
         titleField = view.findViewById(R.id.crime_title)
         dateButton = view.findViewById(R.id.crime_date)
+        solvedCheckBox = view.findViewById(R.id.crime_solved)
 
         dateButton.apply {
             text = crime.date.toString()
@@ -50,7 +50,7 @@ class CrimeFragment: Fragment() {
     override fun onStart() {  // когда пользователь видит фрагмент (после восстановления состояния виджетов)
         super.onStart()
 
-        val titleWatcher = object: TextWatcher {
+        val titleWatcher = object: TextWatcher {  // слушатель изменения текста в EditText
 
             override fun beforeTextChanged(
                 s: CharSequence?,
@@ -74,14 +74,13 @@ class CrimeFragment: Fragment() {
 
             }
         }
-        titleField.addTextChangedListener(titleWatcher) // назначаем слушатель на EditText
-//        Этот слушатель, в отличие от onClickListener, срабатывает не только при взаимодействии
-//        с пользователем, но и при восстановлении состояния виджета (т.е. когда виджет пересобирается,
-//        например, при повороте экрана). Поэтому мы устанавливаем его в onStart (после восстановления
-//        состояния виджета, происходящего после onCreateView и перед onStart): поскольку нам важно то,
-//        что было введено пользоваталем в поле EditText, мы пересоздаем виджет после восстановления
-//        состояния, вследствие чего в поле останется то, что было в данный момент находилось в
-//        crime.title???
+        titleField.addTextChangedListener(titleWatcher)
+
+        solvedCheckBox.apply {
+            setOnCheckedChangeListener { buttonView, isChecked ->
+                crime.isSolved = isChecked()
+            }
+        }
 
 
 

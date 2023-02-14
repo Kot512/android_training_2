@@ -7,7 +7,7 @@ data class Crime(
 //    уникальные идентификаторы (генерируется через вызов UUID.randomUUID())
     var title: String = "",
     val date: Date = Date(),
-    val isSolved: Boolean = false,
+    var isSolved: Boolean = false,
 ) {
 
 }
