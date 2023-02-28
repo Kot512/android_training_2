@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) // активити (при выс-
                                                 // вобождении памяти или повороте экрана) список
         if (currentFragment == null) {          // фрагментов сохраняется (и после уничтожения
-            val fragment = CrimeFragment()      // восстанавливает фрагменты из списка
+            val fragment = CrimeListFragment.newInstance()// восстанавливает фрагменты из списка
             supportFragmentManager                      // весь этот код - транзакция фрагмента
                 .beginTransaction()                     // (т.е. добавление, удаление, присоединение,
                 .add(R.id.fragment_container, fragment) // отсоединение и замена фрагментов в списке

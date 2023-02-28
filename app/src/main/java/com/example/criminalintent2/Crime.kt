@@ -8,6 +8,7 @@ data class Crime(
     var title: String = "",
     val date: Date = Date(),
     var isSolved: Boolean = false,
+    var requiresPolice: Boolean = false,
 ) {
 
 }
